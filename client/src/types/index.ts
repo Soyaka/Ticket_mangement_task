@@ -1,6 +1,6 @@
 
 export interface Ticket {
-  id?: number
+  id: number
   description: string
   status: 'Open' | 'Closed'
   date: string

@@ -7,7 +7,7 @@ interface TicketStore {
   tickets: Ticket[]
   fetchTickets: (pageNumber: number, pageSize: number, sortBy: keyof Ticket, sortDirection: 'asc' | 'desc') => Promise<{ items: Ticket[], totalCount: number }>
   addTicket: (ticket: Omit<Ticket, 'id'>) => Promise<void>
-  updateTicket: (id: number, status: 'Open' | 'Closed') => Promise<void>
+  updateTicket: (id: number, updatedFields: Partial<Omit<Ticket, 'id'>>) => Promise<void>
   deleteTicket: (id: number) => Promise<void>
 }
 
@@ -19,7 +19,7 @@ export const useTicketStore = create<TicketStore>((set) => ({
     set({ tickets: data.items })
     return data
   },
-  addTicket: async (ticket: Omit<Ticket, 'id'>) => {
+  addTicket: async (ticket) => {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,20 +28,21 @@ export const useTicketStore = create<TicketStore>((set) => ({
     if (!response.ok) {
       throw new Error('Failed to add ticket')
     }
-    const newTicket: Ticket = await response.json()
+    const newTicket = await response.json()
     set((state) => ({ tickets: [...state.tickets, newTicket] }))
   },
-  updateTicket: async (id, status) => {
+  updateTicket: async (id, updatedFields) => {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify(updatedFields),
     })
     if (!response.ok) {
       throw new Error('Failed to update ticket')
     }
+    const updatedTicket = await response.json()
     set((state) => ({
-      tickets: state.tickets.map((t) => (t.id === id ? { ...t, status } : t)),
+      tickets: state.tickets.map((t) => (t.id === id ? { ...t, ...updatedTicket } : t)),
     }))
   },
   deleteTicket: async (id) => {

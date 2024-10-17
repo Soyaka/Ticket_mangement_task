@@ -34,7 +34,7 @@ export default function SortableTicketTable() {
 
   const handleUpdateTicket = async (id: number, status: 'Open' | 'Closed') => {
     try {
-      await updateTicket(id, status)
+      await updateTicket(id, {status})
       fetchTickets(currentPage, 8, sortColumn, sortDirection)
     } catch (error) {
       console.error('Failed to update ticket:', error)
