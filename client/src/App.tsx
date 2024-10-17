@@ -1,13 +1,8 @@
-
-import SortableTicketTable from './components/SortableTicketTable.tsx'
-function App() {
-
+import TicketsManager from './components/TicketsManager';
+export default function App() {
   return (
-    <>
-
-      <SortableTicketTable />
-    </>
-  )
+    <div className="h-screen flex flex-col justify-center over flow-y-hidden items-center p-3 gap-3">
+      <TicketsManager />
+    </div>
+  );
 }
-
-export default App
