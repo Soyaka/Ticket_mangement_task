@@ -14,10 +14,21 @@ interface TicketStore {
 export const useTicketStore = create<TicketStore>((set) => ({
   tickets: [],
   fetchTickets: async (pageNumber, pageSize, sortBy, sortDirection) => {
-    const response = await fetch(`${API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`)
-    const data = await response.json()
-    set({ tickets: data.items })
-    return data
+    try {
+      const response = await fetch(
+        `${API_URL}?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDirection=${sortDirection}`
+      );
+      if (!response.ok) {
+        throw new Error('Failed to fetch tickets');
+      }
+
+      const data = await response.json();
+      set({ tickets: data.items });
+      return data;
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+      throw error;
+    }
   },
   addTicket: async (ticket) => {
     const response = await fetch(API_URL, {
@@ -43,7 +54,7 @@ export const useTicketStore = create<TicketStore>((set) => ({
     }
 
     const updatedTicket = await response.json()
-  
+
 
     set((state) => ({
       tickets: state.tickets.map((t) => (t.id === id ? { ...t, ...updatedTicket } : t)),

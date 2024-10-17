@@ -23,14 +23,18 @@ export default function SortableTicketTable() {
       .catch(error => console.error('Failed to fetch tickets:', error))
   }, [currentPage, sortColumn, sortDirection, fetchTickets])
 
+
   const handleSort = (column: keyof Ticket) => {
+    // Toggle the sort direction if the same column is clicked again
     if (column === sortColumn) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     } else {
+      // Otherwise, sort by the newly selected column in ascending order
       setSortColumn(column)
       setSortDirection('asc')
     }
   }
+
 
   const handleUpdateTicket = async (id: number, status: 'Open' | 'Closed') => {
     try {
@@ -56,8 +60,8 @@ export default function SortableTicketTable() {
 
   return (
     <div className="container mx-auto p-4 font-sans">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="w-full min-w-[60vh]">
+      <div className="bg-gray-100 shadow-md min-h-[70vh] overflow-y-auto rounded-lg overflow-hidden">
+        <table className="w-full table-fixed">
           <TableHeader
             sortColumn={sortColumn}
             sortDirection={sortDirection}
@@ -78,7 +82,7 @@ export default function SortableTicketTable() {
       <div className="mt-4 flex justify-between items-center">
         <Button
           onClick={() => setIsAddDialogOpen(true)}
-          className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-emerald-500 hover:bg-emerald-700  text-white font-bold py-2 px-4 rounded"
         >
           Add Ticket
         </Button>

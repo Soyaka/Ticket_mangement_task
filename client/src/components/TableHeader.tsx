@@ -17,7 +17,7 @@ export function TableHeader({ sortColumn, sortDirection, onSort }: TableHeaderPr
 
   return (
     <thead>
-      <tr className="bg-emerald-500 text-white text-left">
+      <tr className="bg-emerald-500 text-white text-left border border-gray-200">
         {headers.map(({ key, label }) => (
           <th
             key={key}

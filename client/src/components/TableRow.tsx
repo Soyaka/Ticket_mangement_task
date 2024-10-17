@@ -8,24 +8,31 @@ interface TableRowProps {
   onDelete: (id: number) => void
 }
 
-export function TableRow({ ticket,  onDelete }: TableRowProps) {
+export function TableRow({ ticket, onDelete }: TableRowProps) {
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false)
 
   return (
-    <tr className={ticket.id % 2 === 0 ? 'bg-gray-100' : 'bg-white'}>
-      <td className="py-3 px-4">{ticket.id}</td>
-      <td className="py-3 px-4">{ticket.description}</td>
-      <td className="py-3 px-4">{ticket.status}</td>
-      <td className="py-3 px-4">{new Date(ticket.date).toLocaleDateString()}</td>
-      <td className="py-3 px-4">
+    <tr className={"bg-gray-100 border border-gray-200"}>
+      <td className="py-1 px-2 border">{ticket.id}</td>
+      <td className="py-1 px-2 border">{ticket.description}</td>
+      <td className="py-1 px-2 border">{ticket.status}</td>
+      <td className="py-1 px-2 border">
+        {new Date(ticket.date).toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit',
+          year: 'numeric',
+        }).replace(',', '-')}
+      </td>
+
+      <td className="py-3 px-4 font-semibold underline">
         <button
-          className="text-purple-600 hover:text-purple-800 mr-2"
+          className="text-purple-600 hover:text-purple-800 underline mr-2"
           onClick={() => setIsUpdateDialogOpen(true)}
         >
           Update
         </button>
         <button
-          className="text-purple-600 hover:text-purple-800"
+          className="text-purple-600 hover:text-purple-800 underline"
           onClick={() => onDelete(ticket.id)}
         >
           Delete
