@@ -10,9 +10,6 @@ obj/
 # Ignore appsettings.Development.json (environment-specific settings)
 appsettings.Development.json
 
-# Ignore compiled project files
-*.sln
-*.csproj
 
 # Ignore HTTP files
 *.http
