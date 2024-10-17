@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using API.Services;
 
-namespace TicketAPI.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,7 +15,7 @@ namespace TicketAPI.Controllers
             _ticketService = ticketService;
         }
 
-        // GET: api/Tickets
+        // GET: api/Tickets?pageNumber=1&pageSize=10
         [HttpGet]
         public async Task<ActionResult<PaginatedResult<Ticket>>> GetTickets([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
@@ -23,7 +23,7 @@ namespace TicketAPI.Controllers
             return Ok(result);
         }
 
-        // GET: api/Tickets/5
+        // GET: api/Tickets/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Ticket>> GetTicket(int id)
         {
@@ -45,7 +45,7 @@ namespace TicketAPI.Controllers
             return CreatedAtAction(nameof(GetTicket), new { id = createdTicket.Id }, createdTicket);
         }
 
-        // PUT: api/Tickets/5
+        // PUT: api/Tickets/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTicket(int id, Ticket ticket)
         {
@@ -64,7 +64,7 @@ namespace TicketAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Tickets/5
+        // DELETE: api/Tickets/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(int id)
         {
