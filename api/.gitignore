@@ -1,0 +1,21 @@
+# Ignore the bin directory
+bin/
+
+# Ignore the obj directory
+obj/
+
+# Ignore user-specific files from Visual Studio Code
+.vscode/
+
+# Ignore appsettings.Development.json (environment-specific settings)
+appsettings.Development.json
+
+# Ignore compiled project files
+*.sln
+*.csproj
+
+# Ignore HTTP files
+*.http
+
+# Ignore system-generated files
+.DS_Store
