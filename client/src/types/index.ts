@@ -1,9 +1,9 @@
 
 export interface Ticket {
-  id: string;
-  description: string;
-  status: 'open' | 'closed';
-  created_at: string;
+  id?: number
+  description: string
+  status: 'Open' | 'Closed'
+  date: string
 }
 
 export interface TicketState {
