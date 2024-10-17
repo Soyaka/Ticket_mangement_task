@@ -35,7 +35,15 @@ export function UpdateTicketDialog({ isOpen, onClose, ticket }: UpdateTicketDial
     setError(null)
 
     try {
-      await updateTicket(ticket.id, { description, status })
+      // Update ticket
+      const updatedTicket = {
+        date: ticket.date,
+        id: ticket.id,
+        description : description,
+        status : status,
+
+      }
+      await updateTicket(ticket.id, updatedTicket)
       onClose()
     } catch (error) {
       console.error('Failed to update ticket:', error)

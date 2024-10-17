@@ -61,7 +61,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(ticket);
         }
 
         // DELETE: api/Tickets/{id}

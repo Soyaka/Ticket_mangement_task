@@ -37,10 +37,14 @@ export const useTicketStore = create<TicketStore>((set) => ({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedFields),
     })
+
     if (!response.ok) {
       throw new Error('Failed to update ticket')
     }
+
     const updatedTicket = await response.json()
+  
+
     set((state) => ({
       tickets: state.tickets.map((t) => (t.id === id ? { ...t, ...updatedTicket } : t)),
     }))

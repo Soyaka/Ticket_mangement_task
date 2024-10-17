@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Ticket } from '../types'
 import { UpdateTicketDialog } from './UpdateTicketDialog'
 
@@ -8,7 +8,7 @@ interface TableRowProps {
   onDelete: (id: number) => void
 }
 
-export function TableRow({ ticket, onUpdate, onDelete }: TableRowProps) {
+export function TableRow({ ticket,  onDelete }: TableRowProps) {
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false)
 
   return (
