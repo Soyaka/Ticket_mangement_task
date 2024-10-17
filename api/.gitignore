@@ -9,7 +9,7 @@ obj/
 
 # Ignore appsettings.Development.json (environment-specific settings)
 appsettings.Development.json
-
+appsettings.json
 
 # Ignore HTTP files
 *.http
