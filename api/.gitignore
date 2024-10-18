@@ -8,8 +8,8 @@ obj/
 .vscode/
 
 # Ignore appsettings.Development.json (environment-specific settings)
-appsettings.Development.json
-appsettings.json
+# appsettings.Development.json
+
 
 # Ignore HTTP files
 *.http
