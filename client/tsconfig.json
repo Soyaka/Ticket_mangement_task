@@ -2,7 +2,8 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.app.json",
+      "types": ["@testing-library/jest-dom", "jest", "node"],
     },
     {
       "path": "./tsconfig.node.json"
@@ -12,6 +13,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
-  }
+    },
+    "types": ["@testing-library/jest-dom", "jest", "node"],
+    "esModuleInterop": true
+  },
+  "include": [
+    "jest-dom.d.ts"
+  ]
 }

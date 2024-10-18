@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect } from 'react'
 
 interface PaginationProps {
   currentPage: number
@@ -8,6 +9,12 @@ interface PaginationProps {
 }
 
 export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      onPageChange(totalPages)
+    }
+  }, [totalPages, currentPage, onPageChange])
+
   return (
     <div className="flex items-center">
       <Button

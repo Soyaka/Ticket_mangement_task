@@ -14,7 +14,7 @@ export function TableRow({ ticket, onDelete }: TableRowProps) {
   return (
     <tr className={"bg-gray-100 border border-gray-200"}>
       <td className="py-1 px-2 border">{ticket.id}</td>
-      <td className="py-1 px-2 border">{ticket.description}</td>
+      <td className="py-1 px-2 border w-1/3">{ticket.description}</td>
       <td className="py-1 px-2 border">{ticket.status}</td>
       <td className="py-1 px-2 border">
         {new Date(ticket.date).toLocaleDateString('en-US', {
@@ -24,7 +24,7 @@ export function TableRow({ ticket, onDelete }: TableRowProps) {
         }).replace(',', '-')}
       </td>
 
-      <td className="py-3 px-4 font-semibold underline">
+      <td className="py-1 px-2  font-semibold underline">
         <button
           className="text-purple-600 hover:text-purple-800 underline mr-2"
           onClick={() => setIsUpdateDialogOpen(true)}

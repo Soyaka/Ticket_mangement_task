@@ -14,32 +14,63 @@ export default function SortableTicketTable() {
   const [sortColumn, setSortColumn] = useState<keyof Ticket>('id')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
+  const [itemsPerPage, setItemsPerPage] = useState(8)
+
+  const calculateItemsPerPage = () => {
+
+    const height = window.innerHeight;
+
+    if (height < 600) return 8; // Small screens
+    if (height < 800) return 12; // Medium screens
+    return 18; // Large screens
+  }
+
+  const refreshTickets = async () => {
+    try {
+      const data = await fetchTickets(currentPage, itemsPerPage, sortColumn, sortDirection)
+      const newTotalPages = Math.ceil(data.totalCount / itemsPerPage)
+
+      setTotalPages(newTotalPages)
+
+      if (currentPage > newTotalPages) {
+        setCurrentPage(newTotalPages)
+      }
+    } catch (error) {
+      console.error('Failed to fetch tickets:', error)
+    }
+  }
 
   useEffect(() => {
-    fetchTickets(currentPage, 8, sortColumn, sortDirection)
-      .then(data => {
-        setTotalPages(Math.ceil(data.totalCount / 8))
-      })
-      .catch(error => console.error('Failed to fetch tickets:', error))
-  }, [currentPage, sortColumn, sortDirection, fetchTickets])
+    const handleResize = () => {
+      const newItemsPerPage = calculateItemsPerPage()
+      setItemsPerPage(newItemsPerPage)
+    }
 
+    handleResize();
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    refreshTickets()
+  }, [currentPage, sortColumn, sortDirection, itemsPerPage])
 
   const handleSort = (column: keyof Ticket) => {
-    // Toggle the sort direction if the same column is clicked again
     if (column === sortColumn) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     } else {
-      // Otherwise, sort by the newly selected column in ascending order
       setSortColumn(column)
       setSortDirection('asc')
     }
   }
 
-
   const handleUpdateTicket = async (id: number, status: 'Open' | 'Closed') => {
     try {
-      await updateTicket(id, {status})
-      fetchTickets(currentPage, 8, sortColumn, sortDirection)
+      await updateTicket(id, { status })
+      refreshTickets()
     } catch (error) {
       console.error('Failed to update ticket:', error)
     }
@@ -48,10 +79,20 @@ export default function SortableTicketTable() {
   const handleDeleteTicket = async (id: number) => {
     try {
       await deleteTicket(id)
-      fetchTickets(currentPage, 8, sortColumn, sortDirection)
+      refreshTickets()
     } catch (error) {
       console.error('Failed to delete ticket:', error)
     }
+  }
+
+  const handleAddTicket = () => {
+    setIsAddDialogOpen(true)
+  }
+
+  const handleTicketAdded = () => {
+    setIsAddDialogOpen(false)
+    refreshTickets()
+    setCurrentPage(totalPages)
   }
 
   const handlePageChange = (page: number) => {
@@ -81,15 +122,15 @@ export default function SortableTicketTable() {
       </div>
       <div className="mt-4 flex justify-between items-center">
         <Button
-          onClick={() => setIsAddDialogOpen(true)}
-          className="bg-emerald-500 hover:bg-emerald-700  text-white font-bold py-2 px-4 rounded"
+          onClick={handleAddTicket}
+          className="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
         >
           Add Ticket
         </Button>
         <AddTicketDialog
           isOpen={isAddDialogOpen}
           onClose={() => setIsAddDialogOpen(false)}
-          onTicketAdded={() => fetchTickets(currentPage, 8, sortColumn, sortDirection)}
+          onTicketAdded={handleTicketAdded}
         />
         <Pagination
           currentPage={currentPage}

@@ -21,7 +21,7 @@ export function TableHeader({ sortColumn, sortDirection, onSort }: TableHeaderPr
         {headers.map(({ key, label }) => (
           <th
             key={key}
-            className="py-3 px-4 font-semibold cursor-pointer"
+            className={`py-3 px-4 font-semibold cursor-pointer ${key === 'description' ? 'w-1/3' : 'w-1/8'}`}
             onClick={() => onSort(key)}
           >
             {label}{' '}
