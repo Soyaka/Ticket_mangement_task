@@ -1,8 +1,3 @@
-I'll create a comprehensive README file using Markdown to make it look professional and well-organized. I'll include all the necessary information about the project setup, manual and automated installation, and usage instructions.
-
-Here's the comprehensive README.md file:
-
-```markdown
 # Ticket Manager Project
 
 ## Table of Contents
@@ -18,12 +13,10 @@ Here's the comprehensive README.md file:
 - [Development](#development)
 - [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
-The Ticket Manager is a full-stack application consisting of a .NET Core API backend and a React frontend. It allows users to create, read, update, and delete tickets in a simple and efficient manner.
+The Ticket Manager is a full-stack application consisting of a .NET Core API backend and a React frontend (with Typescript). It allows users to create, read, update, and delete tickets in a simple and efficient manner.
 
 ## Prerequisites
 
@@ -37,7 +30,6 @@ Before you begin, ensure you have the following installed:
 ## Project Structure
 
 ```
-
 ticket-manager/
 ├── api/
 │   ├── Controllers/
@@ -53,8 +45,7 @@ ticket-manager/
 │   └── vite.config.js
 ├── run_project.sh
 └── README.md
-
-```plaintext
+```
 
 ## Installation
 
@@ -63,26 +54,20 @@ ticket-manager/
 We provide a script to automate the setup and running of both the API and client.
 
 1. Clone the repository:
-```
-
-git clone [https://github.com/your-username/ticket-manager.git](https://github.com/your-username/ticket-manager.git)
-cd ticket-manager
-
-```plaintext
+   ```
+   git clone https://github.com/Soyaka/Ticket_mangement_task.git
+   cd ticket-manager
+   ```
 
 2. Give execution permissions to the script:
-```
-
-chmod +x run_project.sh
-
-```plaintext
+   ```
+   chmod +x setup.sh
+   ```
 
 3. Run the script:
-```
-
-./run_project.sh
-
-```plaintext
+   ```
+   ./setup.sh
+   ```
 
 The script will handle the installation, building, and running of both the API and client.
 
@@ -93,116 +78,86 @@ If you prefer to set up the project manually, follow these steps:
 #### API Setup
 
 1. Navigate to the `api` directory:
-```
-
-cd api
-
-```plaintext
+   ```
+   cd api
+   ```
 
 2. Restore .NET dependencies:
-```
-
-dotnet restore
-
-```plaintext
+   ```
+   dotnet restore
+   ```
 
 3. Update the database:
-```
-
-dotnet ef database update
-
-```plaintext
+   ```
+   dotnet ef database update
+   ```
 
 4. Build the API:
-```
-
-dotnet build
-
-```plaintext
+   ```
+   dotnet build
+   ```
 
 5. Run the API:
-```
-
-dotnet run
-
-```plaintext
+   ```
+   dotnet run
+   ```
 
 #### Client Setup
 
 1. Navigate to the `client` directory:
-```
-
-cd client
-
-```plaintext
+   ```
+   cd client
+   ```
 
 2. Install dependencies (choose one):
-- Using Bun (if installed):
-```
-
-bun install
-
-```plaintext
-- Using npm:
-```
-
-npm install
-
-```plaintext
+   - Using Bun (if installed):
+     ```
+     bun install
+     ```
+   - Using npm:
+     ```
+     npm install
+     ```
 
 3. Run the client (choose one):
-- Using Bun:
-```
-
-bun run dev
-
-```plaintext
-- Using npm:
-```
-
-npm run dev
-
-```plaintext
+   - Using Bun:
+     ```
+     bun run dev
+     ```
+   - Using npm:
+     ```
+     npm run dev
+     ```
 
 ## Usage
 
 After setting up the project:
 
-1. The API will be running on `http://localhost:5000` (or the port specified in your API configuration).
-2. The client will be accessible at `http://localhost:3000` (or the port specified in your client configuration).
+1. The API will be running on `http://localhost:5041` (or the port specified in your API configuration).
+2. The client will be accessible at `http://localhost:5173` (or the port specified in your client configuration).
 3. Use the web interface to manage tickets:
-- Create new tickets
-- View existing tickets
-- Update ticket information
-- Delete tickets
+   - Create new tickets
+   - View existing tickets
+   - Update ticket information
+   - Delete tickets
 
 ## Development
 
 - API: The .NET Core API uses Entity Framework Core for database operations. To make changes to the database schema, update the models in the `api/Models` directory and create a new migration:
-```
-
-dotnet ef migrations add YourMigrationName
-dotnet ef database update
-
-```plaintext
+  ```
+  dotnet ef migrations add NewMigration
+  dotnet ef database update
+  ```
 
 - Client: The React client uses Vite for fast development and building. To add new components or modify existing ones, work in the `client/src` directory.
 
 ## Testing
 
 - API: Run the tests using the following command in the `api` directory:
-```
+  ```
+  dotnet test
+  ```
 
-dotnet test
-
-```plaintext
-
-- Client: Run the tests using the following command in the `client` directory:
-```
-
-npm test
-
-```plaintext
 
 ## Troubleshooting
 
@@ -210,26 +165,6 @@ npm test
 - For client-side errors, check the browser console and the terminal where you're running the client for error messages.
 - Ensure all required ports are free and not being used by other applications.
 - If you're having trouble with Node.js or npm, try clearing the npm cache:
-```
-
-npm cache clean --force
-
-```plaintext
-
-## Contributing
-
-We welcome contributions to the Ticket Manager project. Please follow these steps:
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/AmazingFeature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-5. Push to the branch (`git push origin feature/AmazingFeature`)
-6. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-```
-
-This README.md file provides a comprehensive guide to the Ticket Manager project. It includes sections on project overview, prerequisites, structure, installation (both automated and manual), usage, development guidelines, testing instructions, troubleshooting tips, contribution guidelines, and licensing information. The use of Markdown formatting enhances readability and gives it a professional appearance.
+  ```
+  npm cache clean --force
+  ```
