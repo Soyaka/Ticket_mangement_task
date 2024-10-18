@@ -1,0 +1,4 @@
+
+
+  - Create a script to run the app
+  - Add Readme

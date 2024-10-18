@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Ticket } from '../types'
+import { Ticket } from '@/types'
 import { UpdateTicketDialog } from './UpdateTicketDialog'
 
 interface TableRowProps {

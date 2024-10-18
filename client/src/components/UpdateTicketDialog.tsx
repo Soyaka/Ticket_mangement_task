@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useTicketStore } from '../store/useTicketStore'
-import { Ticket } from '../types'
+import { useTicketStore } from '@/store/useTicketStore'
+import { Ticket } from '@/types'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'

@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Ticket } from '../types'
-import { useTicketStore } from '../store/useTicketStore'
+import { Ticket } from '@/types'
+import { useTicketStore } from '@/store/useTicketStore'
 import { Button } from "@/components/ui/button"
 import AddTicketDialog from "./AddTicketDialog"
 import { TableHeader } from './TableHeader'

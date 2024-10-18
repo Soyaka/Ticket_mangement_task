@@ -1,5 +1,5 @@
 import { ChevronDown, ChevronUp } from 'lucide-react'
-import { Ticket } from '../types'
+import { Ticket } from '@/types'
 
 interface TableHeaderProps {
   sortColumn: keyof Ticket

@@ -4,7 +4,7 @@ using API.Models;
 
 namespace API.Services
 {
-    public class TicketService
+    public class TicketService : ITicketService
     {
         private readonly ApplicationDbContext _context;
 
