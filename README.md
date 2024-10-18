@@ -1,4 +1,4 @@
-# Ticket Manager Project
+# Ticket Manager Task (Private)
 
 ## Table of Contents
 - [Overview](#overview)
