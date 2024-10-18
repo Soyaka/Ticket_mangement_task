@@ -1,4 +1,9 @@
-# Ticket Manager Task (Private for Hahn entreprise )
+I'll create a comprehensive README file using Markdown to make it look professional and well-organized. I'll include all the necessary information about the project setup, manual and automated installation, and usage instructions.
+
+Here's the comprehensive README.md file:
+
+```markdown
+# Ticket Manager Project
 
 ## Table of Contents
 - [Overview](#overview)
@@ -31,6 +36,8 @@ Before you begin, ensure you have the following installed:
 
 ## Project Structure
 
+```
+
 ticket-manager/
 ├── api/
 │   ├── Controllers/
@@ -39,16 +46,15 @@ ticket-manager/
 │   ├── Data/
 │   ├── Program.cs
 │   └── api.csproj
-|   ...
 ├── client/
 │   ├── src/
 │   ├── public/
 │   ├── package.json
 │   └── vite.config.js
-|   ...
-├── setup.sh
+├── run_project.sh
 └── README.md
 
+```plaintext
 
 ## Installation
 
@@ -57,18 +63,26 @@ ticket-manager/
 We provide a script to automate the setup and running of both the API and client.
 
 1. Clone the repository:
+```
+
 git clone [https://github.com/your-username/ticket-manager.git](https://github.com/your-username/ticket-manager.git)
 cd ticket-manager
 
+```plaintext
+
 2. Give execution permissions to the script:
+```
 
-  chmod +x setup.sh
+chmod +x run_project.sh
 
+```plaintext
 
 3. Run the script:
+```
 
-  ./setup.sh
+./run_project.sh
 
+```plaintext
 
 The script will handle the installation, building, and running of both the API and client.
 
@@ -79,10 +93,14 @@ If you prefer to set up the project manually, follow these steps:
 #### API Setup
 
 1. Navigate to the `api` directory:
+```
 
-  cd api
+cd api
+
+```plaintext
 
 2. Restore .NET dependencies:
+```
 
 dotnet restore
 
@@ -211,5 +229,5 @@ We welcome contributions to the Ticket Manager project. Please follow these step
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for detail
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 ```
