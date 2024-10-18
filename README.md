@@ -38,12 +38,14 @@ ticket-manager/
 │   ├── Data/
 │   ├── Program.cs
 │   └── api.csproj
+|     ...
 ├── client/
 │   ├── src/
 │   ├── public/
 │   ├── package.json
 │   └── vite.config.js
-├── run_project.sh
+|     ...
+├── setup.sh
 └── README.md
 ```
 
