@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Ticket } from '../types'
 import { useTicketStore } from '../store/useTicketStore'
 import { Button } from "@/components/ui/button"
@@ -17,9 +17,7 @@ export default function SortableTicketTable() {
   const [itemsPerPage, setItemsPerPage] = useState(8)
 
   const calculateItemsPerPage = () => {
-
     const height = window.innerHeight;
-
     if (height < 600) return 8; // Small screens
     if (height < 800) return 12; // Medium screens
     return 18; // Large screens
@@ -29,9 +27,7 @@ export default function SortableTicketTable() {
     try {
       const data = await fetchTickets(currentPage, itemsPerPage, sortColumn, sortDirection)
       const newTotalPages = Math.ceil(data.totalCount / itemsPerPage)
-
       setTotalPages(newTotalPages)
-
       if (currentPage > newTotalPages) {
         setCurrentPage(newTotalPages)
       }
@@ -66,6 +62,14 @@ export default function SortableTicketTable() {
       setSortDirection('asc')
     }
   }
+
+  const sortedTickets = useMemo(() => {
+    return [...tickets].sort((a, b) => {
+      if (a[sortColumn] < b[sortColumn]) return sortDirection === 'asc' ? -1 : 1;
+      if (a[sortColumn] > b[sortColumn]) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [tickets, sortColumn, sortDirection]);
 
   const handleUpdateTicket = async (id: number, status: 'Open' | 'Closed') => {
     try {
@@ -109,7 +113,7 @@ export default function SortableTicketTable() {
             onSort={handleSort}
           />
           <tbody>
-            {tickets.map((ticket) => (
+            {sortedTickets.map((ticket) => (
               <TableRow
                 key={ticket.id}
                 ticket={ticket}
