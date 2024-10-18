@@ -6,6 +6,7 @@ import AddTicketDialog from "./AddTicketDialog"
 import { TableHeader } from './TableHeader'
 import { TableRow } from './TableRow'
 import { Pagination } from './Pagination'
+import { FilterComponent } from './FilterComponent'
 
 export default function SortableTicketTable() {
   const { tickets, fetchTickets, updateTicket, deleteTicket } = useTicketStore()
@@ -15,6 +16,10 @@ export default function SortableTicketTable() {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
   const [itemsPerPage, setItemsPerPage] = useState(8)
+  // Filter States
+  const [descriptionFilter, setDescriptionFilter] = useState('')
+  const [dateFilter, setDateFilter] = useState('')
+  const [statusFilter, setStatusFilter] = useState('all')
 
   const calculateItemsPerPage = () => {
     const height = window.innerHeight;
@@ -63,13 +68,19 @@ export default function SortableTicketTable() {
     }
   }
 
-  const sortedTickets = useMemo(() => {
-    return [...tickets].sort((a, b) => {
-      if (a[sortColumn] < b[sortColumn]) return sortDirection === 'asc' ? -1 : 1;
-      if (a[sortColumn] > b[sortColumn]) return sortDirection === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }, [tickets, sortColumn, sortDirection]);
+  const filteredAndSortedTickets = useMemo(() => {
+    return [...tickets]
+      .filter(ticket =>
+        ticket.description.toLowerCase().includes(descriptionFilter.toLowerCase()) &&
+        (dateFilter === '' || ticket.date.includes(dateFilter)) &&
+        (statusFilter === 'all' || ticket.status === statusFilter)
+      )
+      .sort((a, b) => {
+        if (a[sortColumn] < b[sortColumn]) return sortDirection === 'asc' ? -1 : 1;
+        if (a[sortColumn] > b[sortColumn]) return sortDirection === 'asc' ? 1 : -1;
+        return 0;
+      });
+  }, [tickets, sortColumn, sortDirection, descriptionFilter, dateFilter, statusFilter]);
 
   const handleUpdateTicket = async (id: number, status: 'Open' | 'Closed') => {
     try {
@@ -105,7 +116,15 @@ export default function SortableTicketTable() {
 
   return (
     <div className="container mx-auto p-4 font-sans">
-      <div className="bg-gray-100 shadow-md min-h-[70vh] overflow-y-auto rounded-lg overflow-hidden">
+      <FilterComponent
+        descriptionFilter={descriptionFilter}
+        setDescriptionFilter={setDescriptionFilter}
+        dateFilter={dateFilter}
+        setDateFilter={setDateFilter}
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+      />
+      <div className="bg-gray-100 shadow-md min-h-[70vh] overflow-y-auto rounded-lg overflow-hidden mt-4">
         <table className="w-full table-fixed">
           <TableHeader
             sortColumn={sortColumn}
@@ -113,7 +132,7 @@ export default function SortableTicketTable() {
             onSort={handleSort}
           />
           <tbody>
-            {sortedTickets.map((ticket) => (
+            {filteredAndSortedTickets.map((ticket) => (
               <TableRow
                 key={ticket.id}
                 ticket={ticket}
