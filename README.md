@@ -56,7 +56,7 @@ We provide a script to automate the setup and running of both the API and client
 1. Clone the repository:
    ```
    git clone https://github.com/Soyaka/Ticket_mangement_task.git
-   cd ticket-manager
+   cd Ticket_mangement_task
    ```
 
 2. Give execution permissions to the script:
